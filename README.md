@@ -16,7 +16,7 @@
 
 ## Description
 
-Participants have to read a hidden scripture (i.e., random text) hidden beneath a grid of dirty pixels. 
+Participants have to read a scripture (i.e., random text) hidden beneath a grid of dirty pixels. 
 The challenge resides in doing so within a budget to claim the flag.
 
 ## Category
