@@ -3,15 +3,22 @@
     box-sizing: border-box;
 }
 
-html, body, #root {
+/* Replace your current html, body, #root height rule with this */
+html {
     height: 100%;
+    background: #0b0f14; /* prevents gray showing through */
 }
 
 body {
+    min-height: 100dvh;  /* fills the visible viewport reliably */
     margin: 0;
     background: #0b0f14;
     color: #e9eef5;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+#root {
+    min-height: 100dvh;  /* full-screen root, still scrolls */
 }
 
 /* Hard reset: no rounding anywhere */
@@ -32,8 +39,8 @@ button:focus {
 }
 
 .app {
-    min-height: 100%;
-    padding-right: 360px; /* reserve space so sidebar never overlaps main */
+    /* reserve space so sidebar never overlaps main */
+    padding-right: 16px;
 }
 
 .topbar {

@@ -402,14 +402,14 @@ export default function App() {
                 </div>
 
                 <div className="topActions">
-                    <button className="btn" onClick={() => setRulesOpen(true)} disabled={busy}>
-                        Rules
-                    </button>
                     <button className="btn" onClick={onNewGame} disabled={!canNewGame}>
                         New Game
                     </button>
                     <button className="btn danger" onClick={onGiveUp} disabled={!canGiveUp}>
                         I give up!
+                    </button>
+                    <button className="btn" onClick={() => setRulesOpen(true)} disabled={busy}>
+                        Rules
                     </button>
                 </div>
             </header>
@@ -417,33 +417,32 @@ export default function App() {
             <main className="main">
                 <div className="centerCol">
                     {/* Preview */}
-                    <section className="panel">
-                        <div className="panelHeader">
-                            <div className="panelTitle">Scripture Preview</div>
-                            <div className="panelMeta">Not clickable</div>
-                        </div>
-
-                        <div className="gridWrap">
-                            <div
-                                className="grid previewGrid"
-                                style={{
-                                    gridTemplateColumns: `repeat(${gridW}, 1fr)`,
-                                    width: "320px",
-                                }}
-                            >
-                                {Array.from({length: gridH}).map((_, y) =>
-                                    Array.from({length: gridW}).map((__, x) => (
-                                        <div key={`p-${x}-${y}`} className={cellClassFor(x, y, true)}/>
-                                    ))
-                                )}
-                            </div>
-                        </div>
-                    </section>
+                    {/*<section className="panel">*/}
+                    {/*    <div className="panelHeader">*/}
+                    {/*        <div className="panelTitle">Scripture Preview</div>*/}
+                    {/*        <div className="panelMeta">Not clickable</div>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="gridWrap">*/}
+                    {/*        <div*/}
+                    {/*            className="grid previewGrid"*/}
+                    {/*            style={{*/}
+                    {/*                gridTemplateColumns: `repeat(${gridW}, 1fr)`,*/}
+                    {/*                width: "320px",*/}
+                    {/*            }}*/}
+                    {/*        >*/}
+                    {/*            {Array.from({length: gridH}).map((_, y) =>*/}
+                    {/*                Array.from({length: gridW}).map((__, x) => (*/}
+                    {/*                    <div key={`p-${x}-${y}`} className={cellClassFor(x, y, true)}/>*/}
+                    {/*                ))*/}
+                    {/*            )}*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</section>*/}
 
                     {/* Main Grid */}
                     <section className="panel">
                         <div className="panelHeader">
-                            <div className="panelTitle">Cleaning Site</div>
+                            <div className="panelTitle">Scripture Cleaning Site</div>
                             <div className="panelMeta">
                                 {hoverXY ? <span>x={hoverXY.x}, y={hoverXY.y}</span> :
                                     <span>Hover a tile to see coordinates</span>}
@@ -482,7 +481,7 @@ export default function App() {
 
                         <div className="hintRow">
                             <div>
-                                Unrevealed = earth • Revealed: 1 = black, 0 = white • Budget only matters for the flag
+                                Unrevealed = earth • Revealed: 1 = black, 0 = white
                             </div>
                         </div>
                     </section>
