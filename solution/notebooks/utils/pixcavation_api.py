@@ -41,11 +41,11 @@ class PixcavationAPI:
     def get_game(self):
         return self._fetch("/api/game")
 
-    def reveal_pixel(self, x, y):
+    def reveal_one_pixel(self, x, y):
         return self._fetch(
             "/api/game/reveal",
             method="POST",
-            body={"x": x, "y": y},
+            body={"pixels": [{"x": x, "y": y}]},
         )
 
     def submit_guess(self, guess):
