@@ -26,8 +26,11 @@ export const pixcavationApi = {
     getGame() {
         return apiFetch("/api/game");
     },
-    revealPixel(x, y) {
-        return apiFetch("/api/game/reveal", {method: "POST", body: {x, y}});
+    // revealPixel(x, y) {
+    //     return apiFetch("/api/game/reveal", {method: "POST", body: {x, y}});
+    // },
+    revealPixels(pixels) {
+        return apiFetch("/api/game/reveal", {method: "POST", body: {pixels}});
     },
     submitGuess(guess) {
         return apiFetch("/api/game/submit", {method: "POST", body: {guess}});

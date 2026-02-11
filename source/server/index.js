@@ -152,13 +152,55 @@ app.get("/api/game", async (req, res) => {
 });
 
 // Reveal pixel
+// app.post("/api/game/reveal", async (req, res) => {
+//     await gameMutex.runExclusive(async () => {
+//         if (!requireGame(req, res)) return;
+//
+//         try {
+//             const {x, y} = req.body || {};
+//             const revealed = game.revealPixel(x, y);
+//
+//             res.json({
+//                 ok: true,
+//                 revealed,
+//                 state: getNormalizedState(),
+//             });
+//         } catch (e) {
+//             res.status(400).json({ok: false, error: e.message});
+//         }
+//     });
+// });
+
+// Reveal many pixels
 app.post("/api/game/reveal", async (req, res) => {
     await gameMutex.runExclusive(async () => {
         if (!requireGame(req, res)) return;
 
         try {
-            const {x, y} = req.body || {};
-            const revealed = game.revealPixel(x, y);
+            const {pixels} = req.body || {};
+
+            if (!Array.isArray(pixels)) {
+                res.status(400).json({ok: false, error: "Data in \"pixels\" must be an array of {x,y} objects."});
+                return;
+            }
+
+            // Validating pixels (before we even try them)
+            for (const p of pixels) {
+                const x = p?.x;
+                const y = p?.y;
+
+                // If the data is invalid, this will throw an error to the catch-all handler
+                game.validatePixelOrThrowError(x, y);
+            }
+
+            // We should be safe now
+            const revealed = [];
+            for (const p of pixels) {
+                const x = p?.x;
+                const y = p?.y;
+                const r = game.revealPixel(x, y);
+                revealed.push(r);
+            }
 
             res.json({
                 ok: true,
@@ -170,6 +212,7 @@ app.post("/api/game/reveal", async (req, res) => {
         }
     });
 });
+
 
 // Submit guess
 app.post("/api/game/submit", async (req, res) => {

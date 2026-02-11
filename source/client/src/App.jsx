@@ -84,6 +84,9 @@ export default function App() {
     // MIN FIX: stops double bootstrap in React 18 StrictMode (dev)
     const didBootstrapRef = useRef(false);
 
+    // cursor / brush size: 1, 2, 3, 4, 5
+    const [brushSize, setBrushSize] = useState(3);
+
     const finished = Boolean(state?.finished);
 
     // single-submission state flag
@@ -217,13 +220,48 @@ export default function App() {
         return isPreview ? "cell cell-white preview" : "cell cell-white";
     }
 
+    function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+    }
+
+    /**
+     * Returns list of pixels covered by a brush of size N with top-left anchored at (x,y).
+     * (2x2 = (x..x+1, y..y+1), 3x3 = (x..x+2, y..y+2))
+     */
+    function getBrushPixels(x, y, size, w, h) {
+        const sx = clamp(x, 0, Math.max(0, w - size));
+        const sy = clamp(y, 0, Math.max(0, h - size));
+
+        const out = [];
+        for (let dy = 0; dy < size; dy++) {
+            for (let dx = 0; dx < size; dx++) {
+                out.push({x: sx + dx, y: sy + dy});
+            }
+        }
+        return out;
+    }
+
+    function isInBrushHover(x, y) {
+        if (!hoverXY || !state) return false;
+        const pts = getBrushPixels(hoverXY.x, hoverXY.y, brushSize, gridW, gridH);
+        return pts.some((p) => p.x === x && p.y === y);
+    }
+
     async function onReveal(x, y) {
-        if (!canReveal) return;
+        if (!canReveal || !state) return;
+
+        const pixels = getBrushPixels(x, y, brushSize, gridW, gridH);
+
+        // Skip already revealed ones so you don't waste API calls/budget.
+        const hiddenPixels = pixels.filter((p) => !wasUserRevealed(p.x, p.y));
+
+        if (hiddenPixels.length === 0) return;
 
         setBusy(true);
         try {
             // no local log mutation; log comes from refreshed state
-            await pixcavationApi.revealPixel(x, y);
+            await pixcavationApi.revealPixels(hiddenPixels);
+
             await refresh();
         } catch (e) {
             pushToast("error", e.message || "Reveal failed.");
@@ -263,7 +301,7 @@ export default function App() {
         if (lines.some((ln) => ln.length !== textLineLength)) return null;
 
         const guess = lines.join("").toUpperCase();
-        
+
         return guess;
     }
 
@@ -441,6 +479,21 @@ export default function App() {
                             <div className="panelMeta">
                                 {hoverXY ? <span>x={hoverXY.x}, y={hoverXY.y}</span> :
                                     <span>Hover a tile to see coordinates</span>}
+                                <span style={{marginLeft: 12}}>
+                                    Brush:
+                                    <select
+                                        value={brushSize}
+                                        onChange={(e) => setBrushSize(Number(e.target.value))}
+                                        disabled={busy}
+                                        style={{marginLeft: 8}}
+                                    >
+                                        <option value={1}>1×1</option>
+                                        <option value={2}>2×2</option>
+                                        <option value={3}>3×3</option>
+                                        <option value={4}>4×4</option>
+                                        <option value={5}>5×5</option>
+                                    </select>
+                                </span>
                             </div>
                         </div>
 
@@ -456,11 +509,12 @@ export default function App() {
                                     Array.from({length: gridW}).map((__, x) => {
                                         const cls = cellClassFor(x, y, false);
                                         const userMarked = finished && wasUserRevealed(x, y);
+                                        const inBrush = isInBrushHover(x, y);
 
                                         return (
                                             <button
                                                 key={`m-${x}-${y}`}
-                                                className={`${cls} ${userMarked ? "userRevealedAfterFinish" : ""}`}
+                                                className={`${cls} ${userMarked ? "userRevealedAfterFinish" : ""} ${inBrush ? "brushHover" : ""}`}
                                                 onClick={() => onReveal(x, y)}
                                                 disabled={!canReveal}
                                                 onMouseEnter={() => setHoverXY({x, y})}
@@ -607,10 +661,15 @@ export default function App() {
             {/* Right sidebar */}
             <aside className="sidebar">
                 <div className="sidebarInner">
-                    <div className="sidebarTitle">Status</div>
-
+                    <div className="sidebarTitle">Cleaning Budget</div>
                     <div className="statRow">
-                        <span>Revealed</span>
+                        <span>Max budget</span>
+                        <span>
+                            {state?.maxReveals ?? 0}
+                        </span>
+                    </div>
+                    <div className="statRow">
+                        <span>Used</span>
                         <span>
                             {state?.revealedCount ?? 0} / {state?.maxReveals ?? 0}
                         </span>

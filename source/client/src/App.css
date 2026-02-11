@@ -182,6 +182,13 @@ button:focus {
     z-index: 2;
 }
 
+/* Brush hover highlight (2x2 / 3x3 area) */
+.brushHover {
+    outline: 2px solid rgba(168, 85, 247, 0.65);
+    outline-offset: -2px;
+    z-index: 2;
+}
+
 /* Preview must not look clickable */
 .previewGrid .cell {
     pointer-events: none;

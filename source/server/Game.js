@@ -280,7 +280,7 @@ class Game {
         return state;
     }
 
-    revealPixel(x, y) {
+    validatePixelOrThrowError(x, y) {
         x = Number(x);
         y = Number(y);
 
@@ -292,6 +292,15 @@ class Game {
         if (x < 0 || y < 0 || y >= height || x >= width) {
             throw new Error("Pixel out of bounds");
         }
+    }
+
+    revealPixel(pixelX, pixelY) {
+
+        // Validating pixels or simply crashing
+        this.validatePixelOrThrowError(pixelX, pixelY);
+
+        const x = Number(pixelX);
+        const y = Number(pixelY);
 
         // Stop all interaction after the single attempt (submit or give up)
         if (this.finished) {
@@ -342,6 +351,11 @@ class Game {
         }
 
         const g = String(guess ?? "").toUpperCase();
+
+        if (g.length !== this.text.length) {
+            throw new Error("Invalid length!");
+        }
+
         const correct = g === this.text;
 
         const withinBudgetAtSubmit = this.revealedPixels.size <= Game.MAX_REVEALED_PIXELS;
