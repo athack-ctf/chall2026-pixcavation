@@ -16,7 +16,7 @@ class Game {
     static CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     static TEXT_LINE_LENGTH = 12;
-    static TEXT_LINE_COUNT = 1;
+    static TEXT_LINE_COUNT = 4;
 
     static FONTS_PATH = path.join(__dirname, "./fonts");
 
