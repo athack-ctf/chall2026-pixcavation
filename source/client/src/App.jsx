@@ -2,10 +2,6 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import "./App.css";
 import {pixcavationApi} from "./api/pixcavationApi";
 
-function normalizeNewlines(s) {
-    return String(s || "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-}
-
 function pad3(n) {
     const s = String(n);
     return s.length >= 3 ? s : "0".repeat(3 - s.length) + s;
@@ -251,25 +247,24 @@ export default function App() {
     function buildGuessStringOrNull() {
         if (!state) return null;
 
-        const L = state.textLineCount;
-        const C = state.textLineLength;
+        const textLineCount = state.textLineCount;
+        const textLineLength = state.textLineLength;
 
         if (!guessAllFilled()) return null;
 
         const lines = [];
-        for (let y = 0; y < L; y++) {
+        for (let y = 0; y < textLineCount; y++) {
             let line = "";
-            for (let x = 0; x < C; x++) line += guessGrid[y][x];
+            for (let x = 0; x < textLineLength; x++) line += guessGrid[y][x];
             lines.push(line);
         }
-        const guess = normalizeNewlines(lines.join("\n"));
 
-        // Strict validation
-        const parts = guess.split("\n");
-        if (parts.length !== L) return null;
-        if (parts.some((ln) => ln.length !== C)) return null;
+        if (lines.length !== textLineCount) return null;
+        if (lines.some((ln) => ln.length !== textLineLength)) return null;
 
-        return guess.toUpperCase();
+        const guess = lines.join("").toUpperCase();
+        
+        return guess;
     }
 
     async function onSubmit() {
