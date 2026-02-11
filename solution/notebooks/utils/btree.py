@@ -8,6 +8,9 @@ class Leaf:
     def is_leaf(self):
         return True
 
+    def to_dict(self):
+        return {"type": "leaf", "value": self.value}
+
 
 class Node:
     def __init__(self, xy, left, right):
@@ -20,6 +23,14 @@ class Node:
     def is_leaf(self):
         return False
 
+    def to_dict(self):
+        return {
+            "type": "node",
+            "value": list(self.value),  # (x, y) -> [x, y]
+            "left": self.left.to_dict(),
+            "right": self.right.to_dict(),
+        }
+
 
 def leaf(ch):
     return Leaf(ch)
@@ -31,7 +42,7 @@ def node(xy, left, right):
 
 def print_btree(t, indent=0):
     pad = "  " * indent
-    if isinstance(t, Leaf):
+    if t.is_leaf():
         print(f"{pad}Leaf({t.value})")
     else:
         print(f"{pad}Node{t.value}")
