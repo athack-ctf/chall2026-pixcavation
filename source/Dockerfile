@@ -4,7 +4,6 @@ FROM node:20-bookworm-slim
 # or npm will skip devDependencies (vite) and your build will fail.
 ENV NODE_ENV=development
 
-
 # Runtime libs commonly needed by node-canvas
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2 \
