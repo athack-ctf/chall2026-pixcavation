@@ -701,8 +701,8 @@ export default function App() {
                     </div>
 
                     <div className="sidebarFooter">
-                        An <a href="https://github.com/athack-ctf" target="_blank">@Hack 2026</a> challenge by{" "}
-                        <a href="https://anixpasbesoin.github.io/" target="_blank">AnixPasBesoin</a>.
+                        {/* An <a href="https://github.com/athack-ctf" target="_blank">@Hack 2026</a> challenge by{" "}
+                        <a href="https://anixpasbesoin.github.io/" target="_blank">AnixPasBesoin</a>. */}
                     </div>
                 </div>
             </aside>

@@ -80,13 +80,13 @@ button:focus {
 
 
 .brandText .title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 900;
     letter-spacing: 0.02em;
 }
 
 .brandText .subtitle {
-    font-size: 12px;
+    font-size: 16px;
     color: #9fb3c7;
     margin-top: 2px;
     margin-right: 24px;
@@ -129,7 +129,7 @@ button:focus {
 }
 
 .panelMeta {
-    font-size: 12px;
+    font-size: 16px;
     color: #9fb3c7;
 }
 
@@ -203,7 +203,7 @@ button:focus {
 /* Hint */
 .hintRow {
     padding: 0 12px 12px;
-    font-size: 12px;
+    font-size: 16px;
     color: #9fb3c7;
 }
 
@@ -321,7 +321,7 @@ button:focus {
     word-break: break-word;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     color: #e9eef5;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 .flagBox {
@@ -333,7 +333,7 @@ button:focus {
 
 .smallNote {
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 16px;
     color: #9fb3c7;
 }
 
@@ -385,7 +385,7 @@ button:focus {
     overflow: auto;
     flex: 1;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .logLine {
@@ -402,7 +402,7 @@ button:focus {
     border-top: 1px solid #1f2a35;
     padding-top: 10px;
     color: #9fb3c7;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 /* Toasts */
@@ -489,7 +489,7 @@ button:focus {
 
 .modalBody {
     color: #cfe0f2;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.5;
 }
 
