@@ -12,9 +12,11 @@ category: "MISC"
 # DO NOT remove the vertical character "|" (aka pipe character)
 description: |
   Today, you're an archaeologist desperate to uncover a buried scripture.
+
   The scripture here is a random text concealed beneath a grid of dirty pixels. 
+
   You gotta clean enough pixels to read the scripture and earn the flag.
-  
+
   [Start your challenge instance](https://instancer.athackctf.com/chall2026-pixcavation/create)
 
 # The field connection_info is used to provide a link, hostname, or instructions on how to connect to a challenge
