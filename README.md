@@ -1,6 +1,6 @@
 # Chall - Pixcavation
 
-> A MISC challenge, presented as a game, yet inspired from a real world hardcore hacking technique.
+> A Misc challenge, presented as a game, yet inspired from a real world hardcore hacking technique.
 
 ## Challenge Type
 
