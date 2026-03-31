@@ -1,24 +1,80 @@
-# Chall - Pixcavation
+# @Hack 2026: Pixcavation
 
-> A Misc challenge, presented as a game, yet inspired from a real world hardcore hacking technique.
+> Authored by [Anis](https://github.com/AnixPasBesoin).
 
-## Challenge Type
+- **Category**: `Misc`
+- **Solves**: `19/120`
+- **Tags**: `sponsored`
+- **Protocol**: `http`
 
-- [X] **ON**line
+> Today, you're an archaeologist desperate to uncover a buried scripture.
+>
+> The scripture here is a random text concealed beneath a grid of dirty pixels.
+>
+> You gotta clean enough pixels to read the scripture and earn the flag.
+>
 
-## Design Type
+## Access a dockerized instance
 
-- [X] **Black**-Box
+Run challenge container using docker compose
 
-## Designer
+```
+docker compose up -d
+```
 
-- Anis
+Open below URL on your browser
 
-## Description
+```
+http://localhost:53019/
+```
 
-Participants have to read a scripture (i.e., random text) hidden beneath a grid of dirty pixels. 
-The challenge resides in doing so within a budget to claim the flag.
+<details>
+<summary>
+How to stop/restart challenge?
+</summary>
 
-## Category
+To stop the challenge run
 
-- `misc`
+```
+docker compose stop
+```
+
+To restart the challenge run
+
+```
+docker compose restart
+```
+
+</details>
+
+## Reveal Flag(s)
+
+Did you try solving this challenge?
+<details>
+<summary>
+Yes
+</summary>
+
+Did you **REALLY** try solving this challenge?
+
+<details>
+<summary>
+Yes, I promise!
+</summary>
+
+- Flag 1: `ATHACKCTF{youtu.be/KcOQfYlyIqw?Bonus}`
+
+</details>
+</details>
+
+
+---
+
+## About @Hack
+
+[@Hack](https://athackctf.com/) is an annual CTF (Capture The Flag) competition hosted
+by [HEXPLOIT ALLIANCE](https://hexploit-alliance.com/) and [TECHNATION](https://technationcanada.ca/) at Concordia
+University in Montreal, Canada.
+
+---
+[Check more challenges from @Hack 2026](https://github.com/athack-ctf/AtHackCTF-2026-Challenges).

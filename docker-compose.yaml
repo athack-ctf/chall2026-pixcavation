@@ -6,6 +6,6 @@ services:
     container_name: chall2026-pixcavation
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: source/Dockerfile
     ports:
-      - "2026:2026"
+      - "53019:2026"
