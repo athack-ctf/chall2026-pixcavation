@@ -14,6 +14,8 @@
 > You gotta clean enough pixels to read the scripture and earn the flag.
 >
 
+<img src=".assets/pixcavation-demo.gif" width="512">
+
 ## Access a dockerized instance
 
 Run challenge container using docker compose
