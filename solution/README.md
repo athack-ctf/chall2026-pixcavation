@@ -2,12 +2,18 @@
 
 ## Writeup
 
-I recommend you watch Paul Stone's conference
-talk: [Black Hat USA 2013 - Pixel Perfect Timing Attacks with HTML5](https://www.youtube.com/watch?v=KcOQfYlyIqw),
-which directly inspired this misc challenge. In a nutshell, Paul describes a timing attack for leaking pixel data from
-cross-origin iframes, one pixel at a time. Paul then describes a method for making the attack more efficient by
-exfiltrating text (rather than raw screenshots) using a "pixel-perfect" OCR. Pixcavation revolves around this same OCR
-idea.
+I recommend watching Paul Stone's talk:  
+[Black Hat USA 2013 - Pixel Perfect Timing Attacks with HTML5](https://www.youtube.com/watch?v=KcOQfYlyIqw), which
+inspired this challenge.
+
+He explains a timing attack that leaks data from cross-origin iframes one pixel at a time. Since each pixel read takes
+time, the goal is to read as few pixels as possible while extracting as much data as possible.
+
+A naive approach would reconstruct a full screenshot of the rendered page, which is slow and inefficient. Instead, Paul
+focuses on targeting the page's source code. Because it is rendered with a predictable, structured font, it becomes
+possible to recover the underlying text using a "pixel-perfect" OCR approach.
+
+Pixcavation puts you under similar constraints, limiting the number of pixels you can read to reveal the scripture.
 
 ## Working code
 
