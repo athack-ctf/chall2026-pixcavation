@@ -2,9 +2,12 @@
 
 ## Writeup
 
-I recommend you watch the
-conference [Black Hat USA 2013 - Pixel Perfect Timing Attacks with HTML5](https://www.youtube.com/watch?v=KcOQfYlyIqw),
-which directly inspired this Misc challenge. It is a bit long and might feel unrelated, but it's definitely worth it.
+I recommend you watch Paul Stone's conference
+talk: [Black Hat USA 2013 - Pixel Perfect Timing Attacks with HTML5](https://www.youtube.com/watch?v=KcOQfYlyIqw),
+which directly inspired this misc challenge. In a nutshell, Paul describes a timing attack for leaking pixel data from
+cross-origin iframes, one pixel at a time. Paul then describes a method for making the attack more efficient by
+exfiltrating text (rather than raw screenshots) using a "pixel-perfect" OCR. Pixcavation revolves around this same OCR
+idea.
 
 ## Working code
 
